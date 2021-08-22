@@ -170,6 +170,7 @@ opBtn.forEach(element => {
     
     element.addEventListener('click',()=>{
 
+        errorDisplay.textContent = "info";
         whatButtonDidIClick = "operator";
         isDecimal = false;
 
@@ -306,6 +307,7 @@ equalsBtn.addEventListener('click', () =>{
 
     whatButtonDidIClick = "equals";
     isDecimal = false;
+    errorDisplay.textContent = "info"; 
 
     console.log(contnue);
 
@@ -321,9 +323,22 @@ equalsBtn.addEventListener('click', () =>{
     }else if(operator == "-"){
                 answer = retValue - retValue2;
     }else if(operator == "/"){
-                answer = retValue/retValue2
+        if(retValue2 == 0){
+                errorDisplay.textContent = "Why would you do that?";
+                retValue = 0;
+                retValue2 = 0;
+                operator = "";
+                display = "0";
+                contnue = 0;
+                answer = 0;
+                isDecimal = false;
+                smallDisplay.textContent = "";
+
+        }else{
+                answer = retValue/retValue2;
+        };
     }else if(operator == "x"){
-                answer=retValue*retValue2
+                answer=retValue*retValue2;
     }else if(operator == "^"){
                 answer = Math.pow(retValue, retValue2);
     };
@@ -332,6 +347,9 @@ equalsBtn.addEventListener('click', () =>{
     display = answer;
     output.textContent = display;
     smallDisplay.textContent = retValue + " " + operator + " " + retValue2;
+    if(contnue == 0){
+        smallDisplay.textContent = retValue;
+    };
     operator = "";
     retValue2 = 0;
     retValue = answer;
@@ -340,6 +358,8 @@ equalsBtn.addEventListener('click', () =>{
 });
 
 backBtn.addEventListener('click', () => {
+    
+    errorDisplay.textContent = "info";
     
     if(whatButtonDidIClick = "number" && contnue == false){
         if(retValue%1 == 0){

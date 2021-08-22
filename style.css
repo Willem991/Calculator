@@ -7,7 +7,16 @@
 }
 
 body{
-    background-color: rgba(222, 232, 233, 0.788);
+    background-image: url(images/background2.jpg);
+    background-size: cover;
+}
+
+button{
+    font-family: "Fredoka One";
+    font-size: 20px;
+    border-radius: 50%;
+    background-image: url(images/button.jpg);
+    color: white;
 }
 
 #calculator{
@@ -33,11 +42,12 @@ body{
     display: grid;
     justify-self: center;
     background-color: white;
+    background-image: url(images/glass.png);
     grid-row-start: 1;
     grid-column-start: 1;
     grid-column-end: 5;
     border-radius: 40%;
-    height: 70%;
+    height: 140px;
     width: 80%;
     font-family: "Orbitron";
     font-size: 150%;
@@ -51,6 +61,7 @@ body{
     grid-row-start: 1;
     justify-self: center;
     font-size: 20px;
+    margin-bottom: 10px;
 }
 
 #display{
