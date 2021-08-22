@@ -13,6 +13,7 @@ body{
 #calculator{
     display: grid;
     grid-template-rows: repeat(6, auto);
+    grid-template-columns: repeat(4, auto);
     grid-column-start: 2;
     grid-row-start: 2;
     background-image: url(images/background.jpg);
@@ -23,7 +24,22 @@ body{
 }
 
 #display{
+    padding-right: 30px;
+    display: grid;
     justify-self: center;
+    justify-items: right;
+    align-items: center;
     background-color: white;
     grid-row-start: 1;
+    grid-column-start: 1;
+    grid-column-end: 5;
+    border-radius: 40%;
+    height: 70%;
+    width: 80%;
+    font-family: "Orbitron";
+    font-size: 150%;
+    font-weight: bold;
+    border-color: black;
+    border-width: 10px;
+    border-style: double;
 }
