@@ -21,7 +21,11 @@ const nineBtn = document.querySelector("#nine");
 
 const btn = document.querySelectorAll('.number')
 
+const output = document.querySelector("#display");
+const errorDisplay = document.querySelector("#error");
+
 let retValue = 0;
+let retValue2 = 0;
 let operator = "";
 let display = "";
 
@@ -71,12 +75,27 @@ btn.forEach(element => {
 
             break;
         }
-
-        if(retValue == 0){
-            retValue = placeholder;
+        if(operator == ""){
+            if(retValue == 0){
+                retValue = placeholder;
+                output.textContent = retValue;
+            }else if(retValue < 100000000   ){
+                retValue = retValue*10 + placeholder;
+                output.textContent = retValue;
+            }else{
+                errorDisplay.textContent = "datalimit reached!"
+            };
         }else{
-            retValue = retValue*10 + placeholder;
-        }
+            if(retValue2 == 0){
+                retValue2 = placeholder;
+                output.textContent = retValue2;
+            }else if(retValue < 100000000){
+                retValue2 = retValue*10 + placeholder;
+                output.textContent = retValue2;
+            }else{
+                errorDisplay.textContent = "datalimit reached!"
+            };
+        };
 
         console.log(retValue);
     });
