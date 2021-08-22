@@ -32,6 +32,8 @@ let operator = "";
 let display = "";
 let contnue = 0;
 let answer;
+let isDecimal = false;
+let DecCounter = 1;
 
 
 //This checks which number has been pressed and assigns it to the screen.
@@ -82,24 +84,75 @@ btn.forEach(element => {
             break;
         }
         if(operator == ""){
-            if(retValue == 0){
-                retValue = placeholder;
-                output.textContent = retValue;
-            }else if(retValue < 100000000   ){
-                retValue = retValue*10 + placeholder;
-                output.textContent = retValue;
+            if(isDecimal == false){
+                if(retValue == 0){
+                    retValue = placeholder;
+                    display = retValue.toString();
+                    output.textContent = display;
+                }else if(retValue < 100000000   ){
+                    retValue = retValue*10 + placeholder;
+                    display = retValue.toString();
+                    output.textContent = display;
+                }else{
+                    errorDisplay.textContent = "datalimit reached!"
+                };
             }else{
-                errorDisplay.textContent = "datalimit reached!"
+                
+
+                if(retValue*10%1 != 0){
+                    errorDisplay.textContent = "No more than 2 decimal places"
+                }else{
+                    retValue = retValue*10;
+                    DecCounter = DecCounter*10;
+
+                    while((retValue/10)%1 != 0 ){
+                        retValue = retValue*10
+                        DecCounter = DecCounter*10
+                    }
+
+                    retValue = ((retValue + placeholder)/DecCounter);
+                    retValue = Math.round(retValue*100)/100;
+                    DecCounter = 1;
+                    display = retValue.toString();
+                    output.textContent = display;
+                };
+                
             };
         }else{
-            if(retValue2 == 0){
-                retValue2 = placeholder;
-                output.textContent = retValue2;
-            }else if(retValue2 < 100000000){
-                retValue2 = retValue2*10 + placeholder;
-                output.textContent = retValue2;
+
+            if(isDecimal == false){
+
+                if(retValue2 == 0){
+                    retValue2 = placeholder;
+                    display = retValue2.toString();
+                    output.textContent = display;
+                }else if(retValue2 < 100000000){
+                    retValue2 = retValue2*10 + placeholder;
+                    display = retValue2.toString();
+                    output.textContent = display;
+                }else{
+                    errorDisplay.textContent = "datalimit reached!"
+                };
             }else{
-                errorDisplay.textContent = "datalimit reached!"
+                
+                if(retValue2*10%1 != 0){
+                    errorDisplay.textContent = "No more than 2 decimal places"
+                }else{
+                    retValue2 = retValue2*10;
+                    DecCounter = DecCounter*10;
+
+                    while((retValue2/10)%1 != 0 ){
+                        retValue2 = retValue2*10
+                        DecCounter = DecCounter*10
+                    }
+
+                    retValue2 = ((retValue2 + placeholder)/DecCounter);
+                    retValue2 = Math.round(retValue2*100)/100;
+                    DecCounter = 1;
+                    display = retValue2.toString();
+                    output.textContent = display;
+                };
+
             };
         };
 
@@ -112,6 +165,8 @@ btn.forEach(element => {
 opBtn.forEach(element => {
     
     element.addEventListener('click',()=>{
+
+        isDecimal = false;
 
         if(contnue == 0){
 
@@ -159,10 +214,83 @@ opBtn.forEach(element => {
             answer = Math.round((answer + Number.EPSILON)*1000 )/1000;
             retValue2 = 0;
             retValue = answer;
-            output.textContent = "";
+            display = "";
+            output.textContent = display;
             smallDisplay.textContent = answer + " " + operator;
         };     
     });
 });
 
+//Clears the calculator and resets everything
+clearBtn.addEventListener('click',() => {
+     retValue = 0;
+     retValue2 = 0;
+     operator = "";
+     display = "0";
+     contnue = 0;
+     answer;
+     isDecimal = false;
+     smallDisplay.textContent = "";
+     output.textContent = display;
+     errorDisplay.textContent = "info"
+
+});
+
+negBtn.addEventListener('click', () =>{
+    if(contnue == 0){
+        retValue = retValue*-1;
+        display = retValue.toString();
+        output.textContent = display;
+    }else{
+        retValue2 = retValue2*-1;
+        display = retValue2.toString();
+        output.textContent = display;
+    }
+});
+
+decimalBtn.addEventListener('click', () => {
+    if(contnue == 0){
+        let decimalChecker = display.split("");
+        
+        let dcmlchecker = decimalChecker.find(function(decimal){
+            if(decimal == "."){
+                return true;
+            };
+        });
+
+        console.log(dcmlchecker);
+
+
+
+        if(dcmlchecker == "."){
+            alert("You already have a decimal included");
+        }else{
+            isDecimal = true;
+            display = retValue + "."
+            output.textContent = display;
+        };
+    }else{
+        let decimalChecker = display.split("");
+        
+        let dcmlchecker = decimalChecker.find(function(decimal){
+            if(decimal == "."){
+                return true;
+            };
+        });
+
+        console.log(dcmlchecker);
+
+
+
+        if(dcmlchecker == "."){
+            alert("You already have a decimal included");
+        }else{
+            isDecimal = true;
+            display = retValue2 + "."
+            output.textContent = display;
+        };
+        
+
+    }
+});
 
