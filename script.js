@@ -5,7 +5,7 @@ const divideBtn = document.querySelector("#divide");
 const timesBtn = document.querySelector("#times");
 const minusBtn = document.querySelector("#minus");
 const plusBtn = document.querySelector("#plus");
-const equalsBtn = document.querySelector("equals");
+const equalsBtn = document.querySelector("#equals");
 const negBtn = document.querySelector("#negative");
 const decimalBtn = document.querySelector("#decimal");
 
@@ -236,6 +236,7 @@ clearBtn.addEventListener('click',() => {
 
 });
 
+//Changes the current screen value to a negative
 negBtn.addEventListener('click', () =>{
     if(contnue == 0){
         retValue = retValue*-1;
@@ -248,6 +249,7 @@ negBtn.addEventListener('click', () =>{
     }
 });
 
+//Allows the input of decimal places
 decimalBtn.addEventListener('click', () => {
     if(contnue == 0){
         let decimalChecker = display.split("");
@@ -289,8 +291,41 @@ decimalBtn.addEventListener('click', () => {
             display = retValue2 + "."
             output.textContent = display;
         };
-        
-
     }
+});
+
+equalsBtn.addEventListener('click', () =>{
+    isDecimal = false;
+
+    console.log(contnue);
+
+    if(contnue == 0){
+
+            display = retValue;
+            smallDisplay.textContent = display;
+
+    }else{
+
+    if(operator == "+"){
+            answer = retValue + retValue2;
+    }else if(operator == "-"){
+                answer = retValue - retValue2;
+    }else if(operator == "/"){
+                answer = retValue/retValue2
+    }else if(operator == "x"){
+                answer=retValue*retValue2
+    }else if(operator == "^"){
+                answer = Math.pow(retValue, retValue2);
+    };
+            
+    answer = Math.round((answer + Number.EPSILON)*1000 )/1000;
+    display = answer;
+    output.textContent = display;
+    smallDisplay.textContent = retValue + " " + operator + " " + retValue2;
+    operator = "";
+    retValue2 = 0;
+    retValue = answer;
+    contnue = 0;
+    };     
 });
 
