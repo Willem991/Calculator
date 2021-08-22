@@ -34,6 +34,7 @@ let contnue = 0;
 let answer;
 let isDecimal = false;
 let DecCounter = 1;
+let whatButtonDidIClick = "none";
 
 
 //This checks which number has been pressed and assigns it to the screen.
@@ -41,6 +42,9 @@ btn.forEach(element => {
     let placeholder;
 
     element.addEventListener('click', () => {
+
+        whatButtonDidIClick = "number";
+
         switch(element.textContent){
             case "1":
                 placeholder = 1
@@ -166,6 +170,7 @@ opBtn.forEach(element => {
     
     element.addEventListener('click',()=>{
 
+        whatButtonDidIClick = "operator";
         isDecimal = false;
 
         if(contnue == 0){
@@ -233,11 +238,13 @@ clearBtn.addEventListener('click',() => {
      smallDisplay.textContent = "";
      output.textContent = display;
      errorDisplay.textContent = "info"
+     whatButtonDidIClick = "clear";
 
 });
 
 //Changes the current screen value to a negative
 negBtn.addEventListener('click', () =>{
+
     if(contnue == 0){
         retValue = retValue*-1;
         display = retValue.toString();
@@ -294,7 +301,10 @@ decimalBtn.addEventListener('click', () => {
     }
 });
 
+//Calculates all dat math!
 equalsBtn.addEventListener('click', () =>{
+
+    whatButtonDidIClick = "equals";
     isDecimal = false;
 
     console.log(contnue);
@@ -325,7 +335,54 @@ equalsBtn.addEventListener('click', () =>{
     operator = "";
     retValue2 = 0;
     retValue = answer;
-    contnue = 0;
+    contnue = 0;    
     };     
+});
+
+backBtn.addEventListener('click', () => {
+    
+    if(whatButtonDidIClick = "number" && contnue == false){
+        if(retValue%1 == 0){
+            if(retValue > 0 && retValue < 10){
+                retValue = 0;
+                display = retValue.toString();
+                output.textContent = display;
+            }else{
+                retValue = Math.floor(retValue/10);
+                display = retValue.toString();
+                output.textContent = display;
+            };
+        }else if((retValue*10)%1 == 0){
+            retValue = Math.floor(retValue);
+            display = retValue.toString();
+            output.textContent = display;
+            isDecimal = false;
+        }else{
+            retValue = Math.floor(retValue*10)/10;
+            display = retValue.toString();
+            output.textContent = display;
+        };
+    }else if(whatButtonDidIClick = "number" && contnue == true){
+        if(retValue2%1 == 0){
+            if(retValue2 > 0 && retValue2 < 10){
+                retValue2 = 0;
+                display = retValue2.toString();
+                output.textContent = display;
+            }else{
+                retValue2 = Math.floor(retValue2/10);
+                display = retValue2.toString();
+                output.textContent = display;
+            };
+        }else if((retValue2*10)%1 == 0){
+            retValue2 = Math.floor(retValue2);
+            display = retValue2.toString();
+            output.textContent = display;
+            isDecimal = false;
+        }else{
+            retValue2 = Math.floor(retValue2*10)/10;
+            display = retValue2.toString();
+            output.textContent = display;
+        };
+    };
 });
 
