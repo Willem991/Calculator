@@ -19,16 +19,22 @@ const sevenBtn = document.querySelector("#seven");
 const eightBtn = document.querySelector("#eight");
 const nineBtn = document.querySelector("#nine");
 
-const btn = document.querySelectorAll('.number')
+const btn = document.querySelectorAll('.number');
+const opBtn = document.querySelectorAll('.operate');
 
 const output = document.querySelector("#display");
 const errorDisplay = document.querySelector("#error");
+const smallDisplay = document.querySelector("#smalldisplay");
 
 let retValue = 0;
 let retValue2 = 0;
 let operator = "";
 let display = "";
+let contnue = 0;
+let answer;
 
+
+//This checks which number has been pressed and assigns it to the screen.
 btn.forEach(element => {
     let placeholder;
 
@@ -89,15 +95,73 @@ btn.forEach(element => {
             if(retValue2 == 0){
                 retValue2 = placeholder;
                 output.textContent = retValue2;
-            }else if(retValue < 100000000){
-                retValue2 = retValue*10 + placeholder;
+            }else if(retValue2 < 100000000){
+                retValue2 = retValue2*10 + placeholder;
                 output.textContent = retValue2;
             }else{
                 errorDisplay.textContent = "datalimit reached!"
             };
         };
 
-        console.log(retValue);
+
+    });
+});
+
+
+//This checks which operator has been pressed, assigns it to the screen and does any calculations if necessary.
+opBtn.forEach(element => {
+    
+    element.addEventListener('click',()=>{
+
+        if(contnue == 0){
+
+            if(element.id == "plus"){
+                operator = "+";
+            }else if(element.id == "minus"){
+                operator = "-";
+            }else if(element.id == "divide"){
+                operator = "/";
+            }else if(element.id == "power"){
+                operator = "^";
+            }else{
+                operator = "x";
+            };
+            contnue = 1;
+            console.log(operator);
+            display = retValue + " " + operator;
+            smallDisplay.textContent = display;
+        }else{
+            console.log(operator);
+            if(operator == "+"){
+                answer = retValue + retValue2;
+            }else if(operator == "-"){
+                answer = retValue - retValue2;
+            }else if(operator == "/"){
+                answer = retValue/retValue2
+            }else if(operator == "x"){
+                answer=retValue*retValue2
+            }else if(operator == "^"){
+                answer = Math.pow(retValue, retValue2);
+            };
+            console.log(operator);
+            if(element.id == "plus"){
+                operator = "+";
+            }else if(element.id == "minus"){
+                operator = "-";
+            }else if(element.id == "divide"){
+                operator = "/";
+            }else if(element.id == "power"){
+                operator = "^";
+            }else{
+                operator = "x";
+            };
+            
+            answer = Math.round((answer + Number.EPSILON)*1000 )/1000;
+            retValue2 = 0;
+            retValue = answer;
+            output.textContent = "";
+            smallDisplay.textContent = answer + " " + operator;
+        };     
     });
 });
 

@@ -47,6 +47,12 @@ body{
     border-style: double;
 }
 
+#smalldisplay{
+    grid-row-start: 1;
+    justify-self: center;
+    font-size: 20px;
+}
+
 #display{
     grid-row-start: 2;
     justify-items: right;
