@@ -198,11 +198,35 @@ opBtn.forEach(element => {
             }else if(operator == "-"){
                 answer = retValue - retValue2;
             }else if(operator == "/"){
-                answer = retValue/retValue2
+                if(retValue2 != 0 ){
+                    answer = retValue/retValue2
+                }else{
+                    errorDisplay.textContent = "Why would you do that?";
+                    retValue = 0;
+                    retValue2 = 0;
+                    operator = "";
+                    display = "0";
+ 
+                    answer = 0;
+                    isDecimal = false;
+                    smallDisplay.textContent = "";
+                };
             }else if(operator == "x"){
                 answer=retValue*retValue2
             }else if(operator == "^"){
-                answer = Math.pow(retValue, retValue2);
+                if(retValue < 0 && retValue2 >-1 && retValue2 < 1){
+                    errorDisplay.textContent = "Why would you do that?";
+                    retValue = 0;
+                    retValue2 = 0;
+                    operator = "";
+                    display = "0";
+
+                    answer = 0;
+                    isDecimal = false;
+                    smallDisplay.textContent = "";
+                }else{
+                    answer = Math.pow(retValue, retValue2);
+                };
             };
             console.log(operator);
             if(element.id == "plus"){
@@ -340,7 +364,19 @@ equalsBtn.addEventListener('click', () =>{
     }else if(operator == "x"){
                 answer=retValue*retValue2;
     }else if(operator == "^"){
+            if(retValue < 0 && retValue2 >-1 && retValue2 < 1){
+                errorDisplay.textContent = "Why would you do that?";
+                retValue = 0;
+                retValue2 = 0;
+                operator = "";
+                display = "0";
+                contnue = 0;
+                answer = 0;
+                isDecimal = false;
+                smallDisplay.textContent = "";
+            }else{
                 answer = Math.pow(retValue, retValue2);
+            };
     };
             
     answer = Math.round((answer + Number.EPSILON)*1000 )/1000;
