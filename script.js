@@ -26,6 +26,10 @@ const output = document.querySelector("#display");
 const errorDisplay = document.querySelector("#error");
 const smallDisplay = document.querySelector("#smalldisplay");
 
+let audio = new Audio("audio/click.wav");
+let audio2 = new Audio("audio/operator.wav");
+let clearAudio = new Audio("audio/clear.wav");
+
 let retValue = 0;
 let retValue2 = 0;
 let operator = "";
@@ -43,6 +47,7 @@ btn.forEach(element => {
 
     element.addEventListener('click', () => {
 
+        audio.play();
         whatButtonDidIClick = "number";
 
         switch(element.textContent){
@@ -170,6 +175,7 @@ opBtn.forEach(element => {
     
     element.addEventListener('click',()=>{
 
+        audio2.play();
         errorDisplay.textContent = "info";
         whatButtonDidIClick = "operator";
         isDecimal = false;
@@ -264,12 +270,14 @@ clearBtn.addEventListener('click',() => {
      output.textContent = display;
      errorDisplay.textContent = "info"
      whatButtonDidIClick = "clear";
+     clearAudio.play();
 
 });
 
 //Changes the current screen value to a negative
 negBtn.addEventListener('click', () =>{
 
+    audio2.play();
     if(contnue == 0){
         retValue = retValue*-1;
         display = retValue.toString();
@@ -283,6 +291,8 @@ negBtn.addEventListener('click', () =>{
 
 //Allows the input of decimal places
 decimalBtn.addEventListener('click', () => {
+
+    audio2.play();
     if(contnue == 0){
         let decimalChecker = display.split("");
         
@@ -329,6 +339,7 @@ decimalBtn.addEventListener('click', () => {
 //Calculates all dat math!
 equalsBtn.addEventListener('click', () =>{
 
+    audio2.play();
     whatButtonDidIClick = "equals";
     isDecimal = false;
     errorDisplay.textContent = "info"; 
@@ -393,10 +404,11 @@ equalsBtn.addEventListener('click', () =>{
     };     
 });
 
+//removes last entery!
 backBtn.addEventListener('click', () => {
     
     errorDisplay.textContent = "info";
-    
+    audio2.play();
     if(whatButtonDidIClick = "number" && contnue == false){
         if(retValue%1 == 0){
             if(retValue > 0 && retValue < 10){
