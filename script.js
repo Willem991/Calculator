@@ -99,9 +99,15 @@ btn.forEach(element => {
                     display = retValue.toString();
                     output.textContent = display;
                 }else if(retValue < 100000000   ){
-                    retValue = retValue*10 + placeholder;
-                    display = retValue.toString();
-                    output.textContent = display;
+                    if(retValue>0){
+                        retValue = retValue*10 + placeholder;
+                        display = retValue.toString();
+                        output.textContent = display;
+                    }else{
+                        retValue = retValue*10 - placeholder;
+                        display = retValue.toString();
+                        output.textContent = display;
+                    }
                 }else{
                     errorDisplay.textContent = "datalimit reached!"
                 };
@@ -119,7 +125,11 @@ btn.forEach(element => {
                         DecCounter = DecCounter*10
                     }
 
-                    retValue = ((retValue + placeholder)/DecCounter);
+                    if(retValue>=0){
+                        retValue = ((retValue + placeholder)/DecCounter);
+                    }else{
+                        retValue = ((retValue - placeholder)/DecCounter);
+                    };
                     retValue = Math.round(retValue*100)/100;
                     DecCounter = 1;
                     display = retValue.toString();
@@ -136,9 +146,15 @@ btn.forEach(element => {
                     display = retValue2.toString();
                     output.textContent = display;
                 }else if(retValue2 < 100000000){
-                    retValue2 = retValue2*10 + placeholder;
-                    display = retValue2.toString();
-                    output.textContent = display;
+                    if(retValue2>0){
+                        retValue2 = retValue2*10 + placeholder;
+                        display = retValue2.toString();
+                        output.textContent = display;
+                    }else{
+                        retValue2 = retValue2*10 - placeholder;
+                        display = retValue2.toString();
+                        output.textContent = display;
+                    }
                 }else{
                     errorDisplay.textContent = "datalimit reached!"
                 };
@@ -155,7 +171,11 @@ btn.forEach(element => {
                         DecCounter = DecCounter*10
                     }
 
-                    retValue2 = ((retValue2 + placeholder)/DecCounter);
+                    if(retValue2>=0){
+                        retValue2 = ((retValue2 + placeholder)/DecCounter);
+                    }else{
+                        retValue2 = ((retValue2 - placeholder)/DecCounter);
+                    }
                     retValue2 = Math.round(retValue2*100)/100;
                     DecCounter = 1;
                     display = retValue2.toString();
