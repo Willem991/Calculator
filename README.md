@@ -1,2 +1,4 @@
 # Calculator
-A calcultor in javascript and html for The Odin Project.
+A calculator in javascript and html for The Odin Project.
+
+Live-link: https://willem991.github.io/Calculator/
